@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auth Demo</title>
+  <style>
+    body { font-family: sans-serif; padding: 2em; }
+    section { margin-bottom: 2em; border: 1px solid #ddd; padding: 1em; }
+    code { background: #eee; padding: 0.2em; }
+  </style>
+</head>
+<body>
+
+  <h1>🚀 Démo Auth avec Supabase + JWT</h1>
+
+  <section>
+    <h2>Créer un compte</h2>
+    <form id="signupForm">
+      <input type="email" id="signupEmail" placeholder="Email" required /><br>
+      <input type="password" id="signupPassword" placeholder="Mot de passe" required /><br>
+      <input type="text" id="signupPseudo" placeholder="Pseudo" /><br>
+      <input type="text" id="signupLocalite" placeholder="Localité" /><br>
+      <button type="submit">S'inscrire</button>
+    </form>
+    <p id="signupResult"></p>
+  </section>
+
+  <section>
+    <h2>Connexion</h2>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required /><br>
+      <input type="password" id="loginPassword" placeholder="Mot de passe" required /><br>
+      <button type="submit">Se connecter</button>
+    </form>
+    <p id="loginResult"></p>
+    <p><strong>Token JWT :</strong> <code id="jwtDisplay"></code></p>
+
+    <button id="recupererInfo">Récupérer info</button>
+    <p id="pEmail"></p>
+    <p id="pPseudo"></p>
+    <p id="pLocalite"></p>
+  </section>
+
+  <section>
+    <h2>Mes annonces protégées</h2>
+    <button id="getAnnoncesBtn">Voir mes annonces</button>
+    <ul id="annoncesList"></ul>
+  </section>
+
+  <section>
+    <h2>Supprimer mon compte</h2>
+    <button id="deleteBtn">Supprimer mon compte</button>
+  </section>
+
+  <script src="./js/script.js"></script>
+</body>
+</html>
