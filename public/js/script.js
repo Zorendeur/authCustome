@@ -15,8 +15,10 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
   });
 
   const data = await res.json();
-  document.getElementById("signupResult").textContent =
-    "Tes bien inscrit copain !";
+  if (data) {
+    document.getElementById("signupResult").textContent =
+      "Tes bien inscrit copain !";
+  }
 });
 
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
@@ -67,25 +69,6 @@ document
     });
   });
 
-document.getElementById("deleteBtn").addEventListener("click", async () => {
-  if (!jwtToken) {
-    alert("Vous devez d'abord vous connecter !");
-    return;
-  }
-
-  if (!confirm("Supprimer votre compte ?")) return;
-
-  const res = await fetch("/me", {
-    method: "DELETE",
-    headers: { Authorization: `Bearer ${jwtToken}` },
-  });
-
-  const data = await res.json();
-  alert(data.message);
-  jwtToken = "";
-  document.getElementById("jwtDisplay").textContent = "";
-});
-
 document
   .getElementById("recupererInfo")
   .addEventListener("click", async (e) => {
@@ -104,3 +87,18 @@ document
     pPseudo.textContent = data.pseudo;
     pLocalite.textContent = data.localite;
   });
+
+document.getElementById("deleteBtn").addEventListener("click", async () => {
+  const res = await fetch("/auth/deleteAccount", {
+    method: "DELETE",
+    credentials: "include",
+  });
+
+  const data = await res.json();
+  console.log(data);
+
+  if (res.ok) {
+    alert("Compte supprimé !");
+    window.location.href = "/";
+  }
+});

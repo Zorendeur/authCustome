@@ -6,7 +6,7 @@ const middleware = require("../middleware");
 router.get('/getToken', controller.getToken);
 router.post("/login",  controller.login);
 router.post('/register', controller.register);
-// router.put('/:id', controller.update);
+router.delete('/deleteAccount', controller.deleteAccount);
 router.post('/logout', controller.logout);
 
 module.exports = router;

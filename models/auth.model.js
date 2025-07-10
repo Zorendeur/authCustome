@@ -28,3 +28,12 @@ exports.getUser = async (email) => {
   if (error) throw error;
   return data; 
 };
+
+exports.deleteUserByEmail = async (email) => {
+  const { error } = await supabase
+    .from("usersCustom")
+    .delete()
+    .eq("email", email);
+
+  if (error) throw error;
+};

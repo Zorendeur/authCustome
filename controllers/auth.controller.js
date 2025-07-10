@@ -1,5 +1,6 @@
 const model = require("../models/auth.model");
 const bcrypt = require("bcrypt");
+const e = require("express");
 const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
@@ -108,5 +109,22 @@ exports.logout = async (req, res) => {
     });
   } catch (e) {
     res.status(500).json({ error: e.message });
+  }
+};
+
+
+exports.deleteAccount = async (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) return res.status(401).json({ message: "Faut un token" });
+    let tokenDecoder = jwt.verify(token, process.env.JWT_SECRET);
+    let email = tokenDecoder.email;
+  try {
+    await model.deleteUserByEmail(email);
+    res.clearCookie("token");
+    res.status(200).json({ message: "Compte supprimé avec succès." });
+  } catch (err) {
+    console.error("Erreur deleteAccount :", err.message);
+    res.status(500).json({ message: "Erreur lors de la suppression du compte." });
   }
 };
